@@ -1,0 +1,14 @@
+import otrosRodados.*
+
+test "test Etapa 4" {
+	const corsita = new ChevroletCorsa()	
+	corsita.moverseArriba()
+	corsita.moverseArriba()
+	corsita.moverseArriba()
+	assert.that(corsita.pasoPor(4,9))
+	assert.notThat(corsita.pasoPor(7,0))
+	assert.that(corsita.pasoPorFila(7))
+	assert.notThat(corsita.pasoPorFila(3))
+	assert.that(corsita.recorrioFilas([7,9]))
+	assert.notThat(corsita.recorrioFilas([9,10,11]))
+}
