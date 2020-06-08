@@ -1,0 +1,31 @@
+import trafic.*
+import otrosRodados.*
+import dependencia.*
+import pedidos.*
+
+test "satisfaction Test" {
+
+	const cachito = new ChevroletCorsa()
+	cachito.definirColor('rojo')
+	
+	const pedido1 = new Pedido(distanciaARecorrer=960, tiempoMaximo=8, cantPasajeros =4, coloresIncompatibles = #{'azul','negro'})
+	
+	assert.that(pedido1.satisfaction(cachito))	
+	pedido1.coloresIncompatibles().add('rojo')
+	assert.notThat(pedido1.satisfaction(cachito))
+	pedido1.coloresIncompatibles().remove('rojo')
+	assert.that(pedido1.satisfaction(cachito))		
+	pedido1.cantPasajeros(6)
+	assert.notThat(pedido1.satisfaction(cachito))
+	pedido1.cantPasajeros(4)
+	assert.that(pedido1.satisfaction(cachito))	
+	pedido1.tiempoMaximo(6)
+	assert.notThat(pedido1.satisfaction(cachito))
+	pedido1.tiempoMaximo(8)
+	assert.that(pedido1.satisfaction(cachito))	
+	pedido1.acelerar()
+	pedido1.acelerar()
+	assert.notThat(pedido1.satisfaction(cachito))
+	pedido1.relajar()
+	assert.that(pedido1.satisfaction(cachito))			
+}

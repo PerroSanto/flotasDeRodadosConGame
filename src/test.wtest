@@ -1,0 +1,71 @@
+import trafic.*
+import otrosRodados.*
+import dependencia.*
+
+test "test con dos dependencias" {
+
+
+	const deportes = new Dependencia()
+	const cultura = new Dependencia()
+	deportes.cantidadEmpleados(45)
+	cultura.cantidadEmpleados(31)
+	
+	const cachito = new ChevroletCorsa()
+	cachito.definirColor('rojo')
+	
+	const corsita1 = new ChevroletCorsa()
+	corsita1.definirColor('azul')
+	const corsita2 = new ChevroletCorsa()
+	corsita2.definirColor('verde')
+	const reno1 = new RenaultKwid()
+	reno1.agregarTanque()
+	const specialOne = new SuperSpecial()
+	specialOne.color('beige')
+	specialOne.velocidadMax(160)
+	specialOne.capacidad(5)
+	specialOne.peso(1200)
+	
+	const reno3 = new RenaultKwid()
+	reno3.agregarTanque()
+	const reno4 = new RenaultKwid()
+	reno4.agregarTanque()
+	const reno5 = new RenaultKwid()
+	trafic.interior(interiorPopular)
+	trafic.motor(motorBatata)
+	
+	deportes.agregarAFlotaVarios([cachito,corsita1,corsita2,reno1,specialOne])
+	cultura.agregarAFlotaVarios([cachito,reno3,reno4,reno5,trafic])
+	
+	//peso total de la flota
+	assert.equals(6450,deportes.pesoTotalFlota())
+	assert.equals(10700,cultura.pesoTotalFlota())
+	
+	//si esta bien o no equipada
+	assert.that(deportes.estaBienEquipada())
+	assert.notThat(cultura.estaBienEquipada())
+	
+	//capacidad total en color azul
+	assert.equals(7,deportes.capacidadTotalEnColor('azul'))
+	assert.equals(10,cultura.capacidadTotalEnColor('azul'))
+	
+	//el color del rodado mas rapido 
+	assert.equals('beige',deportes.colorDelRodadoMasRapido())
+	assert.equals('rojo',cultura.colorDelRodadoMasRapido())
+	
+	//si es grande o no 
+	assert.that(deportes.esGrande())
+	assert.notThat(cultura.esGrande())
+	
+	//capacidad faltante 
+	assert.equals(25,deportes.capacidadFaltante())
+	assert.equals(5,cultura.capacidadFaltante())
+	
+
+}
+
+
+
+
+
+
+

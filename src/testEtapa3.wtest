@@ -1,0 +1,33 @@
+import trafic.*
+import otrosRodados.*
+import dependencia.*
+import pedidos.*
+
+test "test Etapa 3" {
+	const pedido1 = new Pedido(distanciaARecorrer=960, tiempoMaximo=8, cantPasajeros =4, coloresIncompatibles = #{'azul','negro'})	
+	const pedido2 = new Pedido(distanciaARecorrer=960, tiempoMaximo=8, cantPasajeros =4, coloresIncompatibles = #{'azul','negro','verde'})
+	const pedido3 = new Pedido(distanciaARecorrer=960, tiempoMaximo=4, cantPasajeros =5, coloresIncompatibles = #{'azul','negro','verde'})
+	const pedido4 = new Pedido(distanciaARecorrer=100, tiempoMaximo=16, cantPasajeros =1, coloresIncompatibles = #{'azul','amarillo'})
+	const pedido5 = new Pedido(distanciaARecorrer=10000, tiempoMaximo=1, cantPasajeros =10, coloresIncompatibles = #{'azul','rojo','blanco'})
+	const pedido6 = new Pedido(distanciaARecorrer=10000, tiempoMaximo=1, cantPasajeros =4, coloresIncompatibles = #{'azul','rojo'})
+	const deportes = new Dependencia()
+	deportes.agregarVariosPedidos([pedido1,pedido2,pedido3,pedido4,pedido5,pedido6])
+	deportes.totalPasajerosEnPedidos()
+	deportes.cantidadEmpleados(45)
+	const cachito = new ChevroletCorsa()
+	cachito.definirColor('rojo')
+	const reno1 = new RenaultKwid()
+	reno1.agregarTanque()
+	const specialOne = new SuperSpecial(color='blanco', velocidadMax = 260,capacidad=5,peso=1200)
+	deportes.agregarAFlotaVarios([cachito,reno1,specialOne])
+	
+	//en el test de pedidosNoSatisfechos() no se como hacer para validar el resultado
+	//porque al devolver los pedidos no satisfechos son muchos campos
+	//assert.equals(0,deportes.pedidosNoSatisfechos())
+	
+	assert.equals(28,deportes.totalPasajerosEnPedidos())
+	
+	assert.that(deportes.colorIncompatible('azul'))
+	assert.notThat(deportes.colorIncompatible('negro'))
+
+}
